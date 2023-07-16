@@ -1,0 +1,39 @@
+# apiVersion: apps/v1
+# kind: DaemonSet
+# metadata:
+#   name: hello-world-daemonset
+# spec:
+#   selector:
+#     matchLabels:
+#       type: daemon-pod
+#   template:
+#     metadata:
+#       labels:
+#         type: daemon-pod
+#     spec:
+#       containers:
+#         - name: debian
+#           image: debian
+#           command: ["printenv"]
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: debian-daemonset
+  labels:
+    app: debian-app
+spec:
+  selector:
+    matchLabels:
+      app: debian-app
+  template:
+    metadata:
+      labels:
+        app: debian-app
+    spec:
+      containers:
+        - name: debian-container
+          image: debian
+          command: ["printenv"]
+      nodeName: kind-worker
+          # Add additional container settings as needed
+      # Add other Pod spec settings as needed

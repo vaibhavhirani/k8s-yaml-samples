@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: headless-nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: headless-pod
+  template:
+    metadata:
+      labels:
+        name: headless-pod
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: headless-nginx-service
+spec:
+  clusterIP: None
+  selector:
+    name: headless-pod
+  ports:
+    - port: 80
+      targetPort: 80

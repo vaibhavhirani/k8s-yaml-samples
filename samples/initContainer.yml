@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - image: nginx 
+      name: nginx
+      imagePullPolicy: Always
+  initContainers:
+    - image: busybox
+      name: busyboxinit
+      imagePullPolicy: Always  
