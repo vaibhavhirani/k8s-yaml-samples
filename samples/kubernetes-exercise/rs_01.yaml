@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: httpd
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: httpd
+  template:
+    metadata:
+      labels:
+        app: httpd
+        type: web
+    spec:
+      tolerations:
+        - effect: NoSchedule
+          key: type
+          operator: Equal
+          value: web
+      containers:
+        - image: httpd
+          name: httpd
+          imagePullPolicy: Always
